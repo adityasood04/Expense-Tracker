@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
 
+
+
   @override
   State<StatefulWidget> createState() {
     return _ExpensesState();
@@ -40,6 +42,12 @@ class _ExpensesState extends State<Expenses> {
     });
   }
 
+  void _deleteExpense(Expense expense){
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+  }
+
   void _openExpenseOverlay() {
     showModalBottomSheet(
       isScrollControlled: true,
@@ -66,6 +74,7 @@ class _ExpensesState extends State<Expenses> {
           Expanded(
             child: ExpensesList(
               expenses: _registeredExpenses,
+              onRemoveExpense: _deleteExpense,
             ),
           ),
         ],
