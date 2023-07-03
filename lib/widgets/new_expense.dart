@@ -147,16 +147,17 @@ class _NewExpenseState extends State<NewExpense> {
                 },
               ),
               const Spacer(),
-              ElevatedButton(
-                onPressed: _submitExpenseData,
-                child: const Text("Save expense"),
-              ),
-              ElevatedButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 child: const Text("Cancel"),
               ),
+              ElevatedButton(
+                onPressed: _submitExpenseData,
+                child: const Text("Save expense"),
+              ),
+             
             ],
           )
         ],
