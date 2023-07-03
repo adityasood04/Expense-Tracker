@@ -9,7 +9,7 @@ final formatter = DateFormat.yMd();
 const uuid = Uuid();
 
 enum Category{
-  food, travel, leisure, work
+  food, travel, leisure, work,
 }
 
 
