@@ -23,8 +23,7 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void _deleteExpense(Expense expense) {
-  final expenseIndex = _registeredExpenses.indexOf(expense);
-
+    final expenseIndex = _registeredExpenses.indexOf(expense);
 
     setState(() {
       _registeredExpenses.remove(expense);
@@ -34,11 +33,13 @@ class _ExpensesState extends State<Expenses> {
       SnackBar(
         duration: const Duration(seconds: 3),
         content: const Text("Expense deleted"),
-        action: SnackBarAction(label: 'Undo', onPressed: (){
-          setState(() {
-            _registeredExpenses.insert(expenseIndex, expense);
-          });
-        }),
+        action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              setState(() {
+                _registeredExpenses.insert(expenseIndex, expense);
+              });
+            }),
       ),
     );
   }
@@ -53,6 +54,8 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     Widget mainContent = const Center(
       child: Text('No expenses found.'),
     );
@@ -74,14 +77,25 @@ class _ExpensesState extends State<Expenses> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: mainContent,
-          ), 
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(
+                  child: Chart(expenses: _registeredExpenses),
+                ),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            ),
     );
   }
 }
